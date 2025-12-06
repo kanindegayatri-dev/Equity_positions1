@@ -1,33 +1,71 @@
-<h2> Add Transactions</h2>
+<h2 class="title"> Add Transactions</h2>
 
-<form (ngSubmit)="saveTransactions()">
+<form (ngSubmit)="onSubmit()" #transactionForm="ngForm" class="form-card">
     
+    <div class="form-row">
     <label>Trade Id</label>
-    <input type="number" [(ngmodel) = "transaction.tradeId" name="tradeId"]><br><br>
-    
-    <label>Version</label>
-    <input type="number" [(ngmodel) = "transaction.version" name="version"]><br><br>
-    
-    <label>Security Code</label>
-    <input type="text" [(ngmodel) = "transaction.securityCode" name="securityCode"]><br><br>
-    
-    <label>Quanity</label>
-    <input type="number" [(ngmodel) = "transaction.quantity" name="quantity"]><br><br>
-    
+    <input 
+    type="number" [(ngModel)] = "transaction.tradeId" 
+    name="tradeId" 
+    class="form-control"
+    required>
+    </div>
 
-    <label>Action</label>
-    <select [(ngmodel) = "transaction.action" name="action">
+    <div class="form-row">
+    <label>Version</label>
+    <input 
+    type="number" [(ngModel)] = "transaction.version" 
+    name="version" 
+    class="form-control"
+    required>
+    </div>
+
+    <div class="form-row">
+    <label>Security Code</label>
+    <input 
+    type="text" [(ngModel)] = "transaction.securityCode" 
+    name="securityCode" 
+    class="form-control"
+    required>
+    </div>
+
+    <div class="form-row">
+    <label>Quantity</label>
+    <input 
+    type="number" [(ngModel)] = "transaction.quantity" 
+    name="quantity" 
+    class="form-control"
+    required>
+    </div>
+
+    <div class="form-row">
+<label>Action</label>
+    <select [(ngModel)] = "transaction.action" 
+    class="form-control"
+    name="action" 
+    required>
         <option value="INSERT">INSERT</option>
         <option value="UPDATE">UPDATE</option>
         <option value="CANCEL">CANCEL</option>
     </select>
-
+    </div>
+    
+    <div class="form-row">
     <label>Buy/Sell</label>
-    <select [(ngmodel) = "transaction.buySell" name="buySell">
+    <select
+    class="form-control"
+     [(ngModel)] = "transaction.buySell" 
+     name="buySell"
+     required>
         <option value="Buy">Buy</option>
         <option value="Sell">Sell</option>
     </select>
-    <input type="submit" value="Save">
+    </div>
+    
+    <button type="submit" class="btn-primary" [disabled]="!transactionForm.form.valid">Add Transaction</button>
+    
 </form>
 
-<p *ngIf="message">{{message}}</p>
+<p *ngIf="message" class="message">
+    {{message}}
+</p>

@@ -42,5 +42,42 @@ namespace EquityPositions.Service.Services
         {
             return await _positionRepo.GetAllAsync();
         }
+        public async Task<List<Position>> GetCurrentPositionsAsync()
+        {
+            var allTransactions = await _transactionRepo.GetAllAsync();
+
+            var latestPerTrade = allTransactions
+            .GroupBy(t => new { t.TradeId, t.SecurityCode })
+            .Select(g => g
+                .OrderByDescending(t => t.Version)
+                .First())
+                .Select(t => new
+                {
+                    t.SecurityCode,
+                    Units =
+                    t.Action == "CANCEL"
+                    ? 0
+                    : t.BuySell == "Buy"
+                        ? t.Quantity
+                        : -t.Quantity
+                })
+                ;
+                
+            //.Where(t => !string.Equals(t.Action, "Cancel",
+              //                         StringComparison.OrdinalIgnoreCase));
+
+            //var activeTransactions = latestPerTrade.Where(t => !t.Action.Equals("CANCEL", StringComparison.OrdinalIgnoreCase));
+
+            var positions = latestPerTrade
+            .GroupBy(t => t.SecurityCode)
+            .Select(g => new Position
+            {
+                SecurityCode = g.Key,
+                Quantity = g.Sum(x => x.Units)
+            })
+            .ToList();
+
+            return positions;
+        }
     }
 }

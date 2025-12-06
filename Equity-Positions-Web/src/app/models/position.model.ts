@@ -1,4 +1,4 @@
 export interface Position{
     securityCode:string;
-    quanitity:number;
+    quantity:number;
 }

@@ -21,6 +21,33 @@ namespace EquityPositions.DataAccess.Repositories
             return await _context.Positions.ToListAsync();
         }
 
+        public async Task<List<Position>> GetCurrentPositionsAsync()
+        {
+            var latestTransactions = await _context.Transactions
+            .GroupBy(t => t.TradeId)
+            .Select(g => g
+                .OrderByDescending(t => t.Version)
+                .First())
+            .ToListAsync();
+
+            //var activeTransactions = latestTransactions
+            //        .Where(t => !t.Action.Equals("CANCEL", StringComparison.OrdinalIgnoreCase));
+
+            var positions = latestTransactions
+           .GroupBy(t => t.SecurityCode)
+           .Select(g => new Position
+           {
+               SecurityCode = g.Key,
+               Quantity = g.Sum(t =>
+                   t.BuySell.Equals("Buy", StringComparison.OrdinalIgnoreCase)
+                       ? t.Quantity
+                       : -t.Quantity)
+           })
+           .ToList();
+
+            return positions;
+        }
+
         public async Task UpsertAsync(Position position)
         {
             var existing = await _context.Positions

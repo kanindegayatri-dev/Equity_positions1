@@ -9,6 +9,8 @@ namespace EquityPositions.DataAccess.Repositories
     {
         Task<List<Position>> GetAllAsync();
         Task UpsertAsync(Position position);
+
+        Task<List<Position>> GetCurrentPositionsAsync();
     }
 
 }

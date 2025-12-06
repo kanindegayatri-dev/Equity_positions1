@@ -1,10 +1,11 @@
-﻿using EquityPositions.Service.Services;
+﻿using EquityPositions.Core.Entities;
+using EquityPositions.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EquityPositions.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class PositionsController : ControllerBase
     {
         private readonly IPositionService _positionService;
@@ -26,6 +27,13 @@ namespace EquityPositions.Api.Controllers
         {
             await _positionService.RecalculatePositionsAsync();
             return Ok("Positions recalculated successfully");
+        }
+
+        [HttpGet("current")]
+        public async Task<ActionResult<List<Position>>> GetCurrentPositions()
+        {
+            var positions = await _positionService.GetCurrentPositionsAsync();
+            return Ok(positions);
         }
     }
 }

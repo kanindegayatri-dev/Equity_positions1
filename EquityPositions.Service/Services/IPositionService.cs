@@ -9,5 +9,6 @@ namespace EquityPositions.Service.Services
     {
         Task RecalculatePositionsAsync();
         Task<List<Position>> GetPositionsAsync();
+        Task<List<Position>> GetCurrentPositionsAsync();
     }
 }

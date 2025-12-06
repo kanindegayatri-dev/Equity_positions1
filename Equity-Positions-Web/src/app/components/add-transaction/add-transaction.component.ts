@@ -11,7 +11,7 @@ import { Transaction } from '../../models/trasaction.model';
 export class AddTransactionComponent  {
 
   message : string = '';
-  transactionModel : Transaction = {
+  transaction : Transaction = {
     tradeId:0,
     version:1,
     securityCode:'',
@@ -23,14 +23,14 @@ export class AddTransactionComponent  {
   constructor(private transactionsService : TransactionsService) { }
 
   onSubmit(){
-    this.transactionsService.addTransaction(this.transactionModel).subscribe(
+    this.transactionsService.addTransaction(this.transaction).subscribe(
       next => {
         this.message = 'Transaction added successfully!';
-        //console.log(response);
+        
       },
       error => {
         this.message = 'Error adding transaction.';
-       // console.error(error);
+       
       }
     );
 }}

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace EquityPositions.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class TransactionsController : Controller
     {
         private readonly ITransactionService _transactionService;

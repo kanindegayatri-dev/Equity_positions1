@@ -1,15 +1,24 @@
-<h2>Current Positions</h2>
+
+<div class="positions-container">
+<div class="card">
+    <h2>Current Positions</h2>
 
 <table class="positions-table" *ngIf="positions && positions.length; else noData">
+    <thead>
     <tr>
         <th>Security Code</th>
         <th>Position</th>
     </tr>
+    </thead>
+    <tbody>
     <tr *ngFor="let item of positions">
         <td>{{ item.securityCode }}</td>
         <td>{{ item.quantity }}</td>
     </tr>
+    </tbody>
 </table>
+</div>
+</div>
 
 <ng-template #noData>
     <p>No positions available. Add a transaction to see positions here.</p>
