@@ -1,0 +1,47 @@
+h1,h2,h3 {
+    margin:0;
+}
+
+:host{
+    display:block;
+    min-height:100vh;
+    background: #f5f6fa;
+    font-family:system-ui, sans-serif;
+}
+.navbar{
+    background-color: #2c3e50;
+    padding: 12px 32px;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
+}
+
+.navbar-brand{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.nav-links a{
+    color: #fff;
+    text-decoration: none;
+    margin-left: 24px;
+    font-size: 16px;
+}
+.nav-links a.active{
+    border-bottom: 2px solid #fff;
+}
+
+.nav-links a:hover{
+    text-decoration:underline;
+}
+
+.page{
+    max-width:1100px;
+    margin:24px auto;
+    padding: 0 16px 32px;
+}
+.container{
+    padding: 20px;
+}

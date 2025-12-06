@@ -1,0 +1,33 @@
+<h2> Add Transactions</h2>
+
+<form (ngSubmit)="saveTransactions()">
+    
+    <label>Trade Id</label>
+    <input type="number" [(ngmodel) = "transaction.tradeId" name="tradeId"]><br><br>
+    
+    <label>Version</label>
+    <input type="number" [(ngmodel) = "transaction.version" name="version"]><br><br>
+    
+    <label>Security Code</label>
+    <input type="text" [(ngmodel) = "transaction.securityCode" name="securityCode"]><br><br>
+    
+    <label>Quanity</label>
+    <input type="number" [(ngmodel) = "transaction.quantity" name="quantity"]><br><br>
+    
+
+    <label>Action</label>
+    <select [(ngmodel) = "transaction.action" name="action">
+        <option value="INSERT">INSERT</option>
+        <option value="UPDATE">UPDATE</option>
+        <option value="CANCEL">CANCEL</option>
+    </select>
+
+    <label>Buy/Sell</label>
+    <select [(ngmodel) = "transaction.buySell" name="buySell">
+        <option value="Buy">Buy</option>
+        <option value="Sell">Sell</option>
+    </select>
+    <input type="submit" value="Save">
+</form>
+
+<p *ngIf="message">{{message}}</p>
